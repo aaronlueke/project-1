@@ -46,7 +46,10 @@ var quotes = [
 	}
 ];
 
-var randQuote = '';
+var quote = quotes.quote;
+var source = quotes.source;
+var citation = quotes.citation;
+var year = quotes.year;
 
 function getRandomQuote() {
 	var randQuote = quotes[Math.floor(Math.random() * quotes.length)];
@@ -54,8 +57,17 @@ function getRandomQuote() {
 }
 
 function printQuote() {
-	var quote = getRandomQuote();
-	var message = '<p>' + quotes.quote + quotes.source + quotes.citation + quotes.year + '</p>';
+	var message = getRandomQuote();
+	message = "<h1 class='quote'>" + quote + "</h1>";
+	message += "<p class='source'>" + source + "<p>";
+	message += "<span class='citation'>" + citation + "</span>";
+	
+	if (year !== undefined) {
+      message += "<span class='year'>" + year + "</span>";
+    } else {
+      message.getElementByClassName(".year").hide();
+    }
+	 
 	document.getElementById("quote-box").innerHTML = message;
 }
 
