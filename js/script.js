@@ -42,10 +42,8 @@ var quotes = [
 	}
 ];
 
-var quote = quotes.quote;
-var source = quotes.source;
-var citation = quotes.citation;
-var year = quotes.year;
+var message;
+var randQuote = '';
 
 function getRandomQuote() {
 	var randQuote = quotes[Math.floor(Math.random() * quotes.length)];
@@ -53,18 +51,19 @@ function getRandomQuote() {
 }
 
 function printQuote() {
-	var message = getRandomQuote();
-	message = "<h1 class='quote'>" + quote + "</h1>";
-	message += "<p class='source'>" + source + "<p>";
-	message += "<span class='citation'>" + citation + "</span>";
+	var newQuote = getRandomQuote();	
+	var message = "<p class='quote'>" + newQuote.quote + "</p>";
+	message += "<p><span class='source'>" + newQuote.source + "</span>";
+	message += "<span class='citation'>" + newQuote.citation + "</span></p>";
 	
-	if (year !== undefined) {
-      message += "<span class='year'>" + year + "</span>";
-    } else {
-      message.getElementByClassName(".year").hide();
-    }
-	 
-	document.getElementById("quote-box").innerHTML = message;
+	if (newQuote.year !== undefined) {
+      message += "<span class='year'>" + newQuote.year + "</span>";
+      } else {
+      message.getElementsByClassName('year').hide();
+      }
+	
+	  document.getElementById("quote-box").innerHTML = message;
+	
 }
 
-document.getElementById('loadQuote').addEventListener("click", printQuote, false);
+document.getElementById('loadQuote').addEventListener('click', printQuote, false);
