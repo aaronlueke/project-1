@@ -1,3 +1,6 @@
+/*jshint esversion: 6 */
+
+//array of quotes
 var quotes = [
 	{
 		quote: "Saying nice things is easy. The hard part is not sounding sarcastic.",
@@ -24,8 +27,8 @@ var quotes = [
 	 	year: 2007
 	},
 	{
-		quote: "But where did the lighter fluid come from?",
-	 	source: "Will Arnett as Gob Bluth",
+		quote: "I've made a huge mistake.",
+	 	source: "Bluth Family",
 		citation: "Arrested Development",
 	},
 	{
@@ -37,33 +40,54 @@ var quotes = [
 	{
 		quote: "Well, well, well, how the turntables...",
 	 	source: "Steve Carell as Michael Scott",
-		ciation: "The Office",
+		citation: "The Office",
 	 	year: 2009
 	}
 ];
 
-var message;
-var randQuote = '';
-
+//function to randomly select a quote
 function getRandomQuote() {
 	var randQuote = quotes[Math.floor(Math.random() * quotes.length)];
 	return randQuote;
 }
 
+//function to pull information from the random quote
 function printQuote() {
 	var newQuote = getRandomQuote();	
 	var message = "<p class='quote'>" + newQuote.quote + "</p>";
 	message += "<p><span class='source'>" + newQuote.source + "</span>";
 	message += "<span class='citation'>" + newQuote.citation + "</span></p>";
 	
+	//checks if there is a 'year' property
 	if (newQuote.year !== undefined) {
       message += "<span class='year'>" + newQuote.year + "</span>";
-      } else {
-      message.getElementsByClassName('year').hide();
-      }
+      } 
 	
+	//pushes quote to the document
 	  document.getElementById("quote-box").innerHTML = message;
 	
 }
 
+//listens for button to be clicked to load new quote
 document.getElementById('loadQuote').addEventListener('click', printQuote, false);
+
+
+//function to get a random background color
+function getBgColor() {
+  var newColor1 = parseInt(Math.floor(Math.random() * 255));
+  var newColor2 = parseInt(Math.floor(Math.random() * 255));
+  var newColor3 = parseInt(Math.floor(Math.random() * 255));
+  var bgColor = "rgb(" + newColor1 + "," + newColor2 + "," + newColor3 + ")";
+	
+  document.getElementById('body').style.backgroundColor = bgColor;
+}
+
+//listens for button to be click to change background color
+document.getElementById('loadQuote').addEventListener('click', getBgColor, false);
+
+
+//function to automatically load next quote
+function autoClick() {
+  document.getElementById('loadQuote').click();
+}
+window.setInterval(autoClick, 5000);
